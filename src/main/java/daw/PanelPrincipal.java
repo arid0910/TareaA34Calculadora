@@ -41,24 +41,23 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         // Colocamos la botonera y el área texto
         this.add(areaTexto, BorderLayout.NORTH);
         this.add(botonera, BorderLayout.SOUTH);
-        actionBtn();
 
-    }
-
-    public final void actionBtn() {
-        for (int i = 0; i < 15; i++) {
-            botonera.grupoBotones[i].addActionListener(this);
+        for (JButton boton : this.botonera.getgrupoBotones()) {
+            boton.addActionListener(this);
         }
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        for (int i = 0; i < 10; i++) {
-            if (e.getSource() == botonera.grupoBotones[i]) {
-                areaTexto.setText(Integer.toString(i));
-                break;
-            }
+    public void actionPerformed(ActionEvent ae) {
+        // Se obtiene el objeto que desencadena el evento
+        Object o = ae.getSource();
+        // Si es un botón
+        if (o instanceof JButton) {
+            System.out.println(((JButton) o).getText());
+            areaTexto.setText(((JButton) o).getText());
         }
+
+        // RESTO DEL CÓDIGO DE LA LÓGICA DE LA CALCULADORA
     }
 
 }
