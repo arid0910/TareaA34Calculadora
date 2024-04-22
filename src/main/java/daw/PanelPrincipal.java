@@ -58,6 +58,14 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         }
 
         // RESTO DEL CÓDIGO DE LA LÓGICA DE LA CALCULADORA
+        
+        if (o == botonera.grupoBotones[15]){
+            areaTexto.setText("");
+        }
+        
+        if (o == botonera.grupoBotones[10]){
+            areaTexto.setText("adsd");
+        }
     }
 
 }
