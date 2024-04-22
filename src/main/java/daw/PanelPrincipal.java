@@ -21,6 +21,9 @@ public class PanelPrincipal extends JPanel implements ActionListener {
     private PanelBotones botonera;
     private JTextArea areaTexto;
     private int tipoOperacion;
+    private int num1;
+    private int num2;
+    private int resultado;
 
     // Constructor
     public PanelPrincipal() {
@@ -55,16 +58,66 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         if (o instanceof JButton) {
             System.out.println(((JButton) o).getText());
             areaTexto.setText(((JButton) o).getText());
+
         }
 
         // RESTO DEL CÓDIGO DE LA LÓGICA DE LA CALCULADORA
-        
-        if (o == botonera.grupoBotones[15]){
+        //Limpiar
+        num1 = Integer.parseInt(areaTexto.getText());
+
+        if (o == botonera.grupoBotones[15]) {
             areaTexto.setText("");
         }
-        
-        if (o == botonera.grupoBotones[10]){
-            areaTexto.setText("adsd");
+
+        //Suma
+        // Resto de las operaciones
+        if (o == botonera.grupoBotones[10]) {
+            tipoOperacion = 1;
+
+        }
+
+        //Resta
+        if (o == botonera.grupoBotones[11]) {
+            tipoOperacion = 2;
+        }
+
+        //Multiplicar
+        if (o == botonera.grupoBotones[12]) {
+            tipoOperacion = 3;
+        }
+
+        //Dividir
+        if (o == botonera.grupoBotones[13]) {
+            tipoOperacion = 4;
+        }
+
+        //Igual
+        if (o == botonera.grupoBotones[14]) {
+            //switch
+            switch (tipoOperacion) {
+
+                case -1 -> {
+                    areaTexto.setText("No hay operaciónes en la calculadora");
+                }
+
+                case 1 -> {
+                    areaTexto.setText("suma");
+                }
+
+                case 2 -> {
+                    areaTexto.setText("Resta");
+                }
+
+                case 3 -> {
+                    areaTexto.setText("Multi");
+                }
+
+                case 4 -> {
+                    areaTexto.setText("Divi");
+                }
+            }
+
+            areaTexto.setText(Integer.toString(resultado));
         }
     }
 
