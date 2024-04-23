@@ -71,7 +71,7 @@ public class PanelPrincipal extends JPanel implements ActionListener {
 
     public String calculos() {
 
-        String regex = "(\\d)s*([+*/-])s*(\\d)";
+        String regex = "(\\d+)s*([+*/-])s*(\\d+)";
 
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(areaTexto.getText());
