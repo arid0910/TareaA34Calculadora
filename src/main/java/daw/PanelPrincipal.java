@@ -58,7 +58,6 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         }
 
         // RESTO DEL CÓDIGO DE LA LÓGICA DE LA CALCULADORA
-
         if (o == botonera.grupoBotones[15]) {
             areaTexto.setText("");
         }
@@ -83,29 +82,33 @@ public class PanelPrincipal extends JPanel implements ActionListener {
             int calculo;
             double calculoDb;
             String resu = "";
-            
-            switch(operador){
+
+            switch (operador) {
                 case "+" -> {
                     calculo = num1 + num2;
                     resu = Integer.toString(calculo);
                 }
-                
+
                 case "-" -> {
                     calculo = num1 - num2;
                     resu = Integer.toString(calculo);
                 }
-                
+
                 case "*" -> {
                     calculo = num1 * num2;
                     resu = Integer.toString(calculo);
                 }
-                
+
                 case "/" -> {
-                    calculoDb = (double) num1 / num2;
-                    resu = Double.toString(calculoDb);
+                    if (num2 == 0) {
+                        resu = "No se puede divir entre 0";
+                    } else {
+                        calculoDb = (double) num1 / num2;
+                        resu = Double.toString(calculoDb);
+                    }
                 }
             }
-            
+
             return resu;
         }
         return "";
