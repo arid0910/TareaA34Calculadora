@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Pattern;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -69,7 +70,21 @@ public class PanelPrincipal extends JPanel implements ActionListener {
             areaTexto.setText("");
         }
 
-        //Suma
+        //Igual
+        if (o == botonera.grupoBotones[14]) {
+
+        }
+    }
+
+    public int operacion(ActionEvent ae) {
+        
+        Object o = ae.getSource();
+        final String regex = "(\\ds*[+*/-]s*\\d)";
+        final String string = "2/2";
+        
+        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        
+        
         // Resto de las operaciones
         if (o == botonera.grupoBotones[10]) {
             tipoOperacion = 1;
@@ -90,35 +105,7 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         if (o == botonera.grupoBotones[13]) {
             tipoOperacion = 4;
         }
-
-        //Igual
-        if (o == botonera.grupoBotones[14]) {
-            //switch
-            switch (tipoOperacion) {
-
-                case -1 -> {
-                    areaTexto.setText("No hay operaciónes en la calculadora");
-                }
-
-                case 1 -> {
-                    areaTexto.setText("suma");
-                }
-
-                case 2 -> {
-                    areaTexto.setText("Resta");
-                }
-
-                case 3 -> {
-                    areaTexto.setText("Multi");
-                }
-
-                case 4 -> {
-                    areaTexto.setText("Divi");
-                }
-            }
-
-            areaTexto.setText(Integer.toString(resultado));
-        }
+        
+        return 0;
     }
-
 }
