@@ -54,8 +54,7 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         // Si es un botón
         if (o instanceof JButton) {
             System.out.println(((JButton) o).getText());
-            areaTexto.setText(((JButton) o).getText());
-
+            areaTexto.append(((JButton) o).getText());
         }
 
         // RESTO DEL CÓDIGO DE LA LÓGICA DE LA CALCULADORA
@@ -66,7 +65,7 @@ public class PanelPrincipal extends JPanel implements ActionListener {
 
         //Igual
         if (o == botonera.grupoBotones[14]) {
-            areaTexto.setText(calculos());
+            areaTexto.append(calculos());
         }
     }
 
@@ -81,8 +80,8 @@ public class PanelPrincipal extends JPanel implements ActionListener {
             int num1 = Integer.parseInt(matcher.group(1));
             String operador = matcher.group(2);
             int num2 = Integer.parseInt(matcher.group(3));
-            int calculo = 0;
-            double calculoDb = 0;
+            int calculo;
+            double calculoDb;
             String resu = "";
             
             switch(operador){
