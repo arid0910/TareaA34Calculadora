@@ -54,10 +54,13 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         // Si es un botón
         if (o instanceof JButton) {
             System.out.println(((JButton) o).getText());
-            areaTexto.append(((JButton) o).getText());
+            //Con append añado al text area no lo resteo 
+            areaTexto.append(((JButton) o).getText());  
         }
 
         // RESTO DEL CÓDIGO DE LA LÓGICA DE LA CALCULADORA
+        
+        //Limpiar
         if (o == botonera.grupoBotones[15]) {
             areaTexto.setText("");
         }
@@ -69,20 +72,26 @@ public class PanelPrincipal extends JPanel implements ActionListener {
     }
 
     public String calculos() {
-
+        
+        //Regex de 3 grupos para poder asignarlos a variables
         String regex = "(\\d+)s*([+*/-])s*(\\d+)";
 
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(areaTexto.getText());
-
+        //Coge el string del text area
+        Matcher matcher = pattern.matcher(areaTexto.getText()); 
+        
+        
         while (matcher.find()) {
+            //Guardo los valores de los grupos a las variable
             int num1 = Integer.parseInt(matcher.group(1));
             String operador = matcher.group(2);
             int num2 = Integer.parseInt(matcher.group(3));
             int calculo;
             double calculoDb;
             String resu = "";
-
+            
+            //Hago los calculos dependiendo de que es el operador y lo devuelvo como String
+            //para poder usar el .append en el boton =
             switch (operador) {
                 case "+" -> {
                     calculo = num1 + num2;
@@ -103,7 +112,8 @@ public class PanelPrincipal extends JPanel implements ActionListener {
                     if (num2 == 0) {
                         resu = "No se puede divir entre 0";
                     } else {
-                        calculoDb = (double) num1 / num2;
+                        //Lo pongo a double por si da decimales
+                        calculoDb = (double) num1 / num2; 
                         resu = Double.toString(calculoDb);
                     }
                 }
