@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -21,15 +22,10 @@ public class PanelPrincipal extends JPanel implements ActionListener {
     // Atributos de la clase (privados)
     private PanelBotones botonera;
     private JTextArea areaTexto;
-    private int tipoOperacion;
-    private int num1;
-    private int num2;
-    private int resultado;
 
     // Constructor
     public PanelPrincipal() {
         initComponents();
-        tipoOperacion = -1; // No hay operaciones en la calculadora
     }
 
     // Se inicializan los componentes gráficos y se colocan en el panel
@@ -63,8 +59,6 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         }
 
         // RESTO DEL CÓDIGO DE LA LÓGICA DE LA CALCULADORA
-        //Limpiar
-        num1 = Integer.parseInt(areaTexto.getText());
 
         if (o == botonera.grupoBotones[15]) {
             areaTexto.setText("");
@@ -72,40 +66,49 @@ public class PanelPrincipal extends JPanel implements ActionListener {
 
         //Igual
         if (o == botonera.grupoBotones[14]) {
-
+            areaTexto.setText(calculos());
         }
     }
 
-    public int operacion(ActionEvent ae) {
-        
-        Object o = ae.getSource();
-        final String regex = "(\\ds*[+*/-]s*\\d)";
-        final String string = "2/2";
-        
-        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        
-        
-        // Resto de las operaciones
-        if (o == botonera.grupoBotones[10]) {
-            tipoOperacion = 1;
+    public String calculos() {
 
-        }
+        String regex = "(\\d)s*([+*/-])s*(\\d)";
 
-        //Resta
-        if (o == botonera.grupoBotones[11]) {
-            tipoOperacion = 2;
-        }
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(areaTexto.getText());
 
-        //Multiplicar
-        if (o == botonera.grupoBotones[12]) {
-            tipoOperacion = 3;
+        while (matcher.find()) {
+            int num1 = Integer.parseInt(matcher.group(1));
+            String operador = matcher.group(2);
+            int num2 = Integer.parseInt(matcher.group(3));
+            int calculo = 0;
+            double calculoDb = 0;
+            String resu = "";
+            
+            switch(operador){
+                case "+" -> {
+                    calculo = num1 + num2;
+                    resu = Integer.toString(calculo);
+                }
+                
+                case "-" -> {
+                    calculo = num1 - num2;
+                    resu = Integer.toString(calculo);
+                }
+                
+                case "*" -> {
+                    calculo = num1 * num2;
+                    resu = Integer.toString(calculo);
+                }
+                
+                case "/" -> {
+                    calculoDb = (double) num1 / num2;
+                    resu = Double.toString(calculoDb);
+                }
+            }
+            
+            return resu;
         }
-
-        //Dividir
-        if (o == botonera.grupoBotones[13]) {
-            tipoOperacion = 4;
-        }
-        
-        return 0;
+        return "";
     }
 }
